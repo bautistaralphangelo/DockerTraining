@@ -1,43 +1,52 @@
 <html>
+
 <head>
-	<title>
-		My First Blog
-	</title>
-	{% block headCss %}
-		<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/base.css')}}" type="text/css">
-	{% endblock %}
+    <title>
+        My First Blog
+    </title>
+    {% block headCss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/base.css')}}" type="text/css"> {% endblock %}
+    <script type="text/javascript">
+    function editBlog(id) {
+        console.log('Edit ID: ' + id)
+        window.location.replace('/post_get?id=' + id)
+    }
+
+    function deleteBlog(id) {
+        if (confirm("Are you sure you want to delete the post?")) {
+            window.location.replace('/post_delete?id=' + id)
+        }
+    }
+    </script>
 </head>
-	<body class="body">
-		<h2>Welcome to your blog</h2>
-		<form class="form-border" action="/add_post" method="POST">
-			<div class="title wrapper">
-				<input id="input-title" type="text" name="title" placeholder="Title"></input>
-			</div>
 
-			<div class="title wrapper">
-				<textarea id="input-post" name="post"></textarea>
-			</div>
-			<div  class="description wrapper">
-				<input type="submit" id="input-submit" value="POST"></input>
-			</div>
-		</form>
-
-		{% for post in posts %}
-			<div class="blog-border">
-				<div class="title">
-					<div> {{ post.title }} </div>
-				</div>
-				<div class="post">
-					<div> {{ post.post }} </div>
-				</div>
-		  	</div>
-		{% endfor %}
-	
-	</body>
+<body class="body">
+    <h2>Welcome to your blog</h2>
+    <form class="form-border" action="/add_post" method="POST">
+        <div class="title wrapper">
+            <input id="input-title" type="text" name="title" placeholder="Title"></input>
+        </div>
+        <div class="title wrapper">
+            <textarea id="input-post" name="post"></textarea>
+        </div>
+        <div class="description wrapper">
+            <input type="submit" id="input-submit" value="POST"></input>
+        </div>
+    </form>
+    {% for post in posts %}
+    <div class="blog-border">
+        <div class="title">
+            <div> {{ post.title }} </div>
+        </div>
+        <div class="post">
+            <div> {{ post.post }} </div>
+        </div>
+        <div class="description wrapper">
+            <input type="button" onclick="editBlog('{{ post._id }}')" value="Update">
+            <input type="button" onclick="deleteBlog('{{ post._id }}')" value="Remove">
+        </div>
+    </div>
+    {% endfor %}
+</body>
 
 </html>
-
-
-
-
-

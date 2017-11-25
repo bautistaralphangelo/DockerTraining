@@ -83,6 +83,85 @@
           }
         }
       }
+    },
+    "/post/get": {
+      "get": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Get blog post",
+        "description": "Get blog post by id",
+        "operationId": "get_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{\"post\": \"Test\", \"_id\": \"5a198efe00eba80096708830\", \"title\": \"Test\"}"
+          }
+        }
+      }
+    },
+    "/post/update": {
+      "post": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Update blog post",
+        "description": "Update blog post by id",
+        "operationId": "update_post",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "post",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{\"matched_count\": 1}"
+          }
+        }
+      }
+    },
+    "/post/delete": {
+      "get": {
+        "tags": [
+          "blog post"
+        ],
+        "summary": "Delete blog post",
+        "description": "Delete blog post by id",
+        "operationId": "delete_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "{\"deleted_count\": 1}"
+          }
+        }
+      }
     }
   },
   "definitions": {

@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>
+        Edit | {{ post.post }}
+    </title>
+    {% block headCss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/base.css')}}" type="text/css"> {% endblock %}
+    <script type="text/javascript">
+    function onBackpress() {
+        window.location.replace('/');
+    }
+    </script>
+</head>
+
+<body class="body">
+    <h2>Edit Blog</h2>
+    <form class="form-border" action="/post_update" method="POST">
+        <div class="title wrapper">
+            <input id="input-title" type="text" name="title" placeholder="Title" value="{{ post.title }}" />
+        </div>
+        <div class="title wrapper">
+            <textarea id="input-post" name="post">{{ post.post }}</textarea>
+        </div>
+        <div class="description wrapper">
+            <input type="hidden" name="id" value="{{ post._id }}" />
+            <input type="submit" id="input-submit" value="Update"></input>
+            <input type="button" onclick="onBackpress()" value="Back"></input>
+        </div>
+    </form>
+</body>
+
+</html>
